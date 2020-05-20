@@ -27,18 +27,20 @@ class MainFragment : Fragment() {
 
         // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
-        fetchData()
+
         setHasOptionsMenu(true)
         return binding.root
     }
 
     private fun fetchData(){
-        viewModel.getData()
+
+        viewModel.getDataFromRepository()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        fetchData()
         // TODO: Use the ViewModel
     }
 
