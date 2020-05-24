@@ -1,23 +1,28 @@
 package com.example.capstoneapp.ui
 
-import android.app.Application
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
-import com.example.capstoneapp.repository.MyRepository
+import androidx.lifecycle.viewModelScope
+import com.example.capstoneapp.network.MarsApi
+import kotlinx.coroutines.launch
 
-class MainViewModel (val application: Application) : ViewModel() {
+class MainViewModel : ViewModel() {
 
-     var mRepository: MyRepository
+     /*var mRepository: MyRepository
     init {
         mRepository = MyRepository(application)
-    }
+    }*/
     fun getDataFromRepository(){
-        if (mRepository.getConnection()) {
+         viewModelScope.launch {
+             var getPropertiesDeferred = MarsApi.retrofitService.getPopularMoviesAsync("283d14b1c04d04d3c6978ab1c2c5d310")
+
+             var listResult = getPropertiesDeferred.body()
+         }
+        /*if (mRepository.getConnection()) {
             Toast.makeText(application,"internet", Toast.LENGTH_LONG).show()
            // getDataFromRepo(false)
         } else {
             //getDataFromRepo(true)
-        }
+        }*/
     }
     // TODO: Implement the ViewModel
 }

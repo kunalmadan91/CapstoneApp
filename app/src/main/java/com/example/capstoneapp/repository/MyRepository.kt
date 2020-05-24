@@ -7,7 +7,7 @@ import com.example.capstoneapp.network.MarsApi
 class MyRepository constructor(val application: Application) {
 
     suspend fun fetchData(){
-        MarsApi.retrofitService.getPopularMovies(2)
+        MarsApi.retrofitService.getPopularMoviesAsync("2")
     }
     fun getConnection(): Boolean {
         return Utility.hasNetwork(application)
