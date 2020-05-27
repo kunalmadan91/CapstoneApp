@@ -7,14 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.capstoneapp.R
 import com.example.capstoneapp.Utility
 import com.example.capstoneapp.databinding.MainFragmentBinding
+import kotlinx.android.synthetic.main.main_fragment.*
 
 class MainFragment : Fragment() {
 
     companion object {
         fun newInstance() = MainFragment()
+        private const val COL = 3
     }
 
 
@@ -32,8 +35,18 @@ class MainFragment : Fragment() {
         // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
         fetchData()
+        setData();
         setHasOptionsMenu(true)
         return binding.root
+    }
+
+    fun setData(){
+        val movieAdapter = MovieAdapter()
+        movie_recycler_view.apply {
+            setHasFixedSize(true)
+            layoutManager = GridLayoutManager(activity, COL)
+            adapter = movieAdapter
+        }
     }
 
     private fun fetchData(){
